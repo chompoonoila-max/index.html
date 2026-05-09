@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Special Someone 🌸</title>
+    <meta property="og:title" content="มีอะไรจะบอก...ลองกดดูสิ">
+    <meta property="og:description" content="เปิดดูในมือถือนะ มีเซอร์ไพรส์">
+    <meta property="og:image" content="https://path-to-your-cute-image.jpg">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Mali:wght@400;600&display=swap');
+
+        body {
+            background: linear-gradient(135deg, #fff5f5 0%, #fed7e2 100%);
+            font-family: 'Mali', cursive;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .card {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px 60px;
+            border-radius: 40px;
+            box-shadow: 0 20px 40px rgba(255, 105, 180, 0.2);
+            border: 4px solid #ffffff;
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            color: #d53f8c;
+            font-size: 2.2rem;
+            margin-bottom: 40px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+
+        .button-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            min-height: 60px;
+        }
+
+        button {
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            font-family: 'Mali', cursive;
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        #yesBtn {
+            background: #ff6491;
+            color: white;
+            box-shadow: 0 8px 20px rgba(255, 100, 145, 0.4);
+        }
+
+        #yesBtn:hover {
+            transform: scale(1.15);
+            background: #ff4d80;
+        }
+
+        #noBtn {
+            background: #e2e8f0;
+            color: #718096;
+            position: fixed; /* ใช้ fixed เพื่อให้เคลื่อนที่ได้ทั่วจอ */
+            z-index: 999;
+            transition: all 0.1s ease-out; /* ทำให้ดูพริ้วเวลากดหนี */
+        }
+
+        .floating-heart {
+            position: absolute;
+            color: #ffb6c1;
+            animation: float 4s ease-in infinite;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+
+        .honey-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+
+        .love-icon {
+            font-size: 100px;
+            animation: pulse 1s infinite;
+        }
+
+        .love-title {
+            color: #ff4d80;
+        }
+
+        .love-text {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card" id="loveCard">
+        <div class="honey-icon">🍯</div>
+        <h1>ทำไรอยู่น้า?<br>อยู่กะใครน้า</h1>
+        <div class="button-wrapper">
+            <button id="yesBtn" onclick="showLove()">อยู่กับแฟน55</button>
+            <button id="noBtn" onmouseover="runAway()">นั่งเล่น/ไถตต/อื่นๆ</button>
+        </div>
+    </div>
+
+    <script>
+        // ฟังก์ชันทำให้ปุ่ม "ไม่ใช่" วิ่งหนี
+        function runAway() {
+            const btn = document.getElementById('noBtn');
+            
+            // สุ่มตำแหน่งใหม่โดยไม่ให้เกินขอบหน้าจอ
+            const maxX = window.innerWidth - btn.clientWidth - 20;
+            const maxY = window.innerHeight - btn.clientHeight - 20;
+            
+            const randomX = Math.floor(Math.random() * maxX);
+            const randomY = Math.floor(Math.random() * maxY);
+            
+            btn.style.left = randomX + 'px';
+            btn.style.top = randomY + 'px';
+        }
+
+        // ฟังก์ชันเมื่อกด "ตกลง"
+        function showLove() {
+            const card = document.getElementById('loveCard');
+            card.innerHTML = `
+                <div class="love-icon">💖</div>
+                <h1 class="love-title">เย้! น่ารักที่สุดเลย!<br>งั้นจองตัวแล้วนะ ห้ามคืนคำ!</h1>
+                <p class="love-text">ขอบคุณที่ยอมให้จีบนะค่ะ</p>
+            `;
+            
+            // เอฟเฟกต์พลุหัวใจ
+            for(let i=0; i<100; i++) {
+                setTimeout(createFloatingHeart, i * 50);
+            }
+        }
+
+        function createFloatingHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'floating-heart';
+            heart.innerHTML = ['🌸', '❤️', '✨', '☁️'][Math.floor(Math.random() * 4)];
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = Math.random() * 20 + 20 + 'px';
+            heart.style.duration = Math.random() * 2 + 3 + 's';
+            document.body.appendChild(heart);
+            
+            setTimeout(() => heart.remove(), 4000);
+        }
+
+        // ปล่อยหัวใจลอยเบาๆ ตั้งแต่เริ่ม
+        setInterval(createFloatingHeart, 800);
+    </script>
+
+</body>
+</html>
